@@ -18,7 +18,7 @@ writer_cnt = csv.DictWriter(tkCount_csv, fieldnames=tkcnt_header)
 writer_cnt.writeheader()
 n_count = []
 while True:
-	chunck = f.readlines(2000)
+	chunck = f.readlines(1024)
 	if not chunck: break
 	for l in chunck:
 		l = l.strip().split(' ')
@@ -26,7 +26,6 @@ while True:
 		if l[1] in pop_name: n_count.append({'token': l[1], 'count': l[0]})
 tkCount_csv.close()
 f.close()
-
 
 # create a new name_count.csv file
 namecnt_csv = open('name_counts.csv', 'w')

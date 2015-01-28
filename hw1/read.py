@@ -26,7 +26,8 @@ writer_tk.writeheader()
 
 n_fg, c_fg = True, False
 while True:
-	chunck = f.readlines(2000)
+	chunck = f.readlines(1024)
+	if not chunck: break
 	for l in chunck:
 		if n_fg:
 			new = {"title": 'null', "author": 'null', "release_date": 'null', "ebook_id": 'null', "language": 'null', "body": []}		
