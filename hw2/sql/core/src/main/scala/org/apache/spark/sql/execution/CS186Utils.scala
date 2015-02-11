@@ -106,7 +106,12 @@ object CS186Utils {
    */
   def getUdfFromExpressions(expressions: Seq[Expression]): ScalaUdf = {
     // IMPLEMENT ME
-    null
+    var udf: ScalaUdf = null
+    for ( i <- 0 to expressions.length-1 ){
+      if (expressions(i).isInstanceOf[ScalaUdf])
+        udf = expressions(i).asInstanceOf[ScalaUdf]
+    }
+    udf
   }
 
   /**
