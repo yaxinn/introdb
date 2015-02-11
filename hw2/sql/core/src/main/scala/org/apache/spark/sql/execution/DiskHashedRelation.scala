@@ -64,13 +64,16 @@ private[sql] class DiskPartition (
    */
   def insert(row: Row) = {
     // IMPLEMENT ME
+    if (inputClosed) {
+      throw new SparkException("Should not be reading from file before closing input. Bad things will happen!")
+    }
     data.add(row)
     if (measurePartitionSize() > blockSize) {
       data.remove(row)
       spillPartitionToDisk()
-      closePartition()
       data.clear()
     }
+    data.add(row)
   }
 
   /**
@@ -121,7 +124,7 @@ private[sql] class DiskPartition (
       override def hasNext() = {
         // IMPLEMENT ME
         if (currentIterator.hasNext) true
-        else false
+        else fetchNextChunk()
       }
 
       /**
@@ -151,10 +154,10 @@ private[sql] class DiskPartition (
    */
   def closeInput() = {
     // IMPLEMENT ME
-    if (writtenToDisk == false){
+    if (!writtenToDisk){
       spillPartitionToDisk()
-      closePartition()
     }
+    outStream.close()
     inputClosed = true
   }
 
