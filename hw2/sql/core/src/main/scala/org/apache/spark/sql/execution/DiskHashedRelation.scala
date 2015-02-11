@@ -37,13 +37,14 @@ protected [sql] final class GeneralDiskHashedRelation(partitions: Array[DiskPart
 
   override def getIterator() = {
     // IMPLEMENT ME
-     partitions.toIterator
+    partitions.toIterator
   }
 
   override def closeAllPartitions() = {
     // IMPLEMENT ME
-    for ( i <- 0 to (partitions.length - 1))    
+    for ( i <- 0 to (partitions.length - 1)) {
       partitions(i).closePartition()
+    }
   }
 }
 
@@ -124,8 +125,7 @@ private[sql] class DiskPartition (
 
       override def hasNext() = {
         // IMPLEMENT ME
-        if (currentIterator.hasNext)
-          true
+        if (currentIterator.hasNext) true
         else fetchNextChunk()
       }
 
