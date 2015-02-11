@@ -67,9 +67,9 @@ private[sql] class DiskPartition (
    */
   def insert(row: Row) = {
     // IMPLEMENT ME
-    if (inputClosed) {
-      throw new SparkException("Should not be reading from file before closing input. Bad things will happen!")
-    }
+    // if (inputClosed) {
+    //   throw new SparkException("Should not be reading from file before closing input. Bad things will happen!")
+    // }
     data.add(row)
     if (measurePartitionSize() > blockSize) {
       data.remove(row)
@@ -198,13 +198,22 @@ private[sql] object DiskHashedRelation {
                 size: Int = 64,
                 blockSize: Int = 64000) = {
     // IMPLEMENT ME
+    val partitions = new Array[DiskPartition](size)
 
     while(input.hasNext){
       var row = input.next()
       var key = keyGenerator(row)
-
+      var value = key.hashCode() % size
+      //if(partitions(value) == null){
+        partitions(value) = new DiskPartition("partition_".concat(value.toString), blockSize)
+      //}
+      partitions(value).insert(key)
     }
-    
-    null
+    for( i <- 0 to size - 1) {
+      // if(partitions(i) != null) {
+        partitions(i).closeInput()
+      // }
+    }
+    new GeneralDiskHashedRelation(partitions)
   }
 }
