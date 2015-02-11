@@ -37,11 +37,14 @@ protected [sql] final class GeneralDiskHashedRelation(partitions: Array[DiskPart
 
   override def getIterator() = {
     // IMPLEMENT ME
-    null
+    partitions.toIterator
   }
 
   override def closeAllPartitions() = {
     // IMPLEMENT ME
+    for ( i <- 0 to (partitions.length - 1)) {
+      partitions(i).closePartition()
+    }
   }
 }
 
@@ -195,6 +198,13 @@ private[sql] object DiskHashedRelation {
                 size: Int = 64,
                 blockSize: Int = 64000) = {
     // IMPLEMENT ME
+
+    while(input.hasNext){
+      var row = input.next()
+      var key = keyGenerator(row)
+
+    }
+    
     null
   }
 }
