@@ -16,7 +16,7 @@ class DiskHashedRelationSuite extends FunSuite {
     val data: Array[Row] = (0 to 100).map(i => Row(i)).toArray
     val hashedRelation: DiskHashedRelation = DiskHashedRelation(data.iterator, keyGenerator, 3, 64000)
     var count: Int = 0
-
+    println("test1")
     for (partition <- hashedRelation.getIterator()) {
       for (row <- partition.getData()) {
         assert(row.hashCode() % 3 == count)
@@ -28,6 +28,7 @@ class DiskHashedRelationSuite extends FunSuite {
   test ("empty input") {
     val data: ArraySeq[Row] = new ArraySeq[Row](0)
     val hashedRelation: DiskHashedRelation = DiskHashedRelation(data.iterator, keyGenerator)
+    println("test2")
 
     for (partition <- hashedRelation.getIterator()) {
       assert(!partition.getData.hasNext)
