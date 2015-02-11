@@ -64,6 +64,13 @@ private[sql] class DiskPartition (
    */
   def insert(row: Row) = {
     // IMPLEMENT ME
+    data.add(row)
+    if (measurePartitionSize() > blockSize) {
+      data.remove(row)
+      spillPartitionToDisk()
+      closePartition()
+      data.clear()
+    }
   }
 
   /**
@@ -107,12 +114,14 @@ private[sql] class DiskPartition (
 
       override def next() = {
         // IMPLEMENT ME
-        null
+        currentIterator.next()
+        // null
       }
 
       override def hasNext() = {
         // IMPLEMENT ME
-        false
+        if (currentIterator.hasNext) true
+        else false
       }
 
       /**
@@ -123,7 +132,12 @@ private[sql] class DiskPartition (
        */
       private[this] def fetchNextChunk(): Boolean = {
         // IMPLEMENT ME
-        false
+        if (chunkSizeIterator.hasNext){
+          byteArray = getNextChunkBytes(inStream, chunkSizeIterator.next())
+          currentIterator = getListFromBytes(byteArray).iterator.asScala
+          true
+        }
+        else false
       }
     }
   }
@@ -137,6 +151,10 @@ private[sql] class DiskPartition (
    */
   def closeInput() = {
     // IMPLEMENT ME
+    if (writtenToDisk == false){
+      spillPartitionToDisk()
+      closePartition()
+    }
     inputClosed = true
   }
 

@@ -1,4 +1,4 @@
-[0m[[0minfo[0m] [0mUpdating {file:/Users/vikram/Code/186/staff/hw2/project/}spark-style...[0m
+[0m[[0minfo[0m] [0mUpdating {file:/vagrant/group162/hw2/project/}spark-style...[0m
 [0m[[0mdebug[0m] [0m:: resolving dependencies :: org.apache.spark#spark-style_2.10;0.1-SNAPSHOT[0m
 [0m[[0mdebug[0m] [0m	confs: [compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool][0m
 [0m[[0mdebug[0m] [0m	validate = true[0m
@@ -7,7 +7,7 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT [compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies org.apache.spark#spark-style_2.10;0.1-SNAPSHOT->org.scala-lang#scala-library;2.10.4 [compile->default(compile)][0m
 [0m[[0minfo[0m] [0mResolving org.scala-lang#scala-library;2.10.4 ...[0m
-[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@19c3e10d[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@351e9ab6[0m
 [0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang#scala-library;2.10.4[0m
 [0m[[0mdebug[0m] [0m	found org.scala-lang#scala-library;2.10.4 in sbt-chain[0m
 [0m[[0mdebug[0m] [0m	[2.10.4] org.scala-lang#scala-library;2.10.4[0m
@@ -17,15 +17,44 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies org.apache.spark#spark-style_2.10;0.1-SNAPSHOT->org.scalastyle#scalastyle_2.10;0.4.0 [compile->default(compile)][0m
 [0m[[0minfo[0m] [0mResolving org.scalastyle#scalastyle_2.10;0.4.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.scalastyle#scalastyle_2.10;0.4.0 {compile=[default(compile)]}[0m
-[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scalastyle#scalastyle_2.10;0.4.0[0m
-[0m[[0mdebug[0m] [0m	found org.scalastyle#scalastyle_2.10;0.4.0 in sbt-chain[0m
+[0m[[0minfo[0m] [0mResolving org.scalastyle#scalastyle_2.10;0.4.0 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain-delegate: Checking cache for: dependency: org.scalastyle#scalastyle_2.10;0.4.0 {compile=[default(compile)]}[0m
+[0m[[0mdebug[0m] [0m		tried /home/vagrant/.ivy2/local/org.scalastyle/scalastyle_2.10/0.4.0/ivys/ivy.xml[0m
+[0m[[0mdebug[0m] [0m	local: no ivy file found for org.scalastyle#scalastyle_2.10;0.4.0[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scalastyle/scalastyle_2.10/0.4.0/scalastyle_2.10-0.4.0.pom[0m
+[0m[[0mdebug[0m] [0m	public: found md file for org.scalastyle#scalastyle_2.10;0.4.0[0m
+[0m[[0mdebug[0m] [0m		=> https://repo1.maven.org/maven2/org/scalastyle/scalastyle_2.10/0.4.0/scalastyle_2.10-0.4.0.pom (0.4.0)[0m
+[0m[[0mdebug[0m] [0mdownloading https://repo1.maven.org/maven2/org/scalastyle/scalastyle_2.10/0.4.0/scalastyle_2.10-0.4.0.pom ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scalastyle/scalastyle_2.10/0.4.0/scalastyle_2.10-0.4.0.pom[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scalastyle/scalastyle_2.10/0.4.0/scalastyle_2.10-0.4.0.pom.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scalastyle/scalastyle_2.10/0.4.0/scalastyle_2.10-0.4.0.pom[0m
+[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.scalastyle#scalastyle_2.10;0.4.0!scalastyle_2.10.pom(pom.original) (640ms)[0m
+[0m[[0minfo[0m] [0mResolving org.sonatype.oss#oss-parent;7 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.sonatype.oss#oss-parent;7 {}[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.sonatype.oss#oss-parent;7[0m
+[0m[[0mdebug[0m] [0m		tried /home/vagrant/.ivy2/local/org.scalastyle/scalastyle_2.10/0.4.0/jars/scalastyle_2.10.jar[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scalastyle/scalastyle_2.10/0.4.0/scalastyle_2.10-0.4.0.jar[0m
+[0m[[0mdebug[0m] [0m	found org.scalastyle#scalastyle_2.10;0.4.0 in public[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies org.apache.spark#spark-style_2.10;0.1-SNAPSHOT->org.scalastyle#scalastyle_2.10;0.4.0 [compile->runtime][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies org.apache.spark#spark-style_2.10;0.1-SNAPSHOT->org.scalastyle#scalastyle_2.10;0.4.0 [compile->compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies org.scalastyle#scalastyle_2.10;0.4.0->org.scalariform#scalariform_2.10;0.1.4 [compile->master(*)][0m
 [0m[[0minfo[0m] [0mResolving org.scalariform#scalariform_2.10;0.1.4 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.scalariform#scalariform_2.10;0.1.4 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
-[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scalariform#scalariform_2.10;0.1.4[0m
-[0m[[0mdebug[0m] [0m	found org.scalariform#scalariform_2.10;0.1.4 in sbt-chain[0m
+[0m[[0minfo[0m] [0mResolving org.scalariform#scalariform_2.10;0.1.4 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain-delegate: Checking cache for: dependency: org.scalariform#scalariform_2.10;0.1.4 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
+[0m[[0mdebug[0m] [0m		tried /home/vagrant/.ivy2/local/org.scalariform/scalariform_2.10/0.1.4/ivys/ivy.xml[0m
+[0m[[0mdebug[0m] [0m	local: no ivy file found for org.scalariform#scalariform_2.10;0.1.4[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scalariform/scalariform_2.10/0.1.4/scalariform_2.10-0.1.4.pom[0m
+[0m[[0mdebug[0m] [0m	public: found md file for org.scalariform#scalariform_2.10;0.1.4[0m
+[0m[[0mdebug[0m] [0m		=> https://repo1.maven.org/maven2/org/scalariform/scalariform_2.10/0.1.4/scalariform_2.10-0.1.4.pom (0.1.4)[0m
+[0m[[0mdebug[0m] [0mdownloading https://repo1.maven.org/maven2/org/scalariform/scalariform_2.10/0.1.4/scalariform_2.10-0.1.4.pom ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scalariform/scalariform_2.10/0.1.4/scalariform_2.10-0.1.4.pom[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scalariform/scalariform_2.10/0.1.4/scalariform_2.10-0.1.4.pom.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scalariform/scalariform_2.10/0.1.4/scalariform_2.10-0.1.4.pom[0m
+[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.scalariform#scalariform_2.10;0.1.4!scalariform_2.10.pom(pom.original) (686ms)[0m
+[0m[[0mdebug[0m] [0m		tried /home/vagrant/.ivy2/local/org.scalariform/scalariform_2.10/0.1.4/jars/scalariform_2.10.jar[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scalariform/scalariform_2.10/0.1.4/scalariform_2.10-0.1.4.jar[0m
+[0m[[0mdebug[0m] [0m	found org.scalariform#scalariform_2.10;0.1.4 in public[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies org.scalastyle#scalastyle_2.10;0.4.0->org.scalariform#scalariform_2.10;0.1.4 [compile->compile(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies org.scalariform#scalariform_2.10;0.1.4->org.scala-lang#scala-library;2.10.0 [compile->master(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies org.scalariform#scalariform_2.10;0.1.4->org.scala-lang#scala-library;2.10.4 [compile->master(*)][0m
@@ -39,8 +68,21 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies org.scalastyle#scalastyle_2.10;0.4.0->com.github.scopt#scopt_2.10;3.2.0 [compile->master(*)][0m
 [0m[[0minfo[0m] [0mResolving com.github.scopt#scopt_2.10;3.2.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: com.github.scopt#scopt_2.10;3.2.0 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
-[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: com.github.scopt#scopt_2.10;3.2.0[0m
-[0m[[0mdebug[0m] [0m	found com.github.scopt#scopt_2.10;3.2.0 in sbt-chain[0m
+[0m[[0minfo[0m] [0mResolving com.github.scopt#scopt_2.10;3.2.0 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain-delegate: Checking cache for: dependency: com.github.scopt#scopt_2.10;3.2.0 {compile=[compile(*), master(*)], runtime=[runtime(*)]}[0m
+[0m[[0mdebug[0m] [0m		tried /home/vagrant/.ivy2/local/com.github.scopt/scopt_2.10/3.2.0/ivys/ivy.xml[0m
+[0m[[0mdebug[0m] [0m	local: no ivy file found for com.github.scopt#scopt_2.10;3.2.0[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/com/github/scopt/scopt_2.10/3.2.0/scopt_2.10-3.2.0.pom[0m
+[0m[[0mdebug[0m] [0m	public: found md file for com.github.scopt#scopt_2.10;3.2.0[0m
+[0m[[0mdebug[0m] [0m		=> https://repo1.maven.org/maven2/com/github/scopt/scopt_2.10/3.2.0/scopt_2.10-3.2.0.pom (3.2.0)[0m
+[0m[[0mdebug[0m] [0mdownloading https://repo1.maven.org/maven2/com/github/scopt/scopt_2.10/3.2.0/scopt_2.10-3.2.0.pom ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/com/github/scopt/scopt_2.10/3.2.0/scopt_2.10-3.2.0.pom[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/com/github/scopt/scopt_2.10/3.2.0/scopt_2.10-3.2.0.pom.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/com/github/scopt/scopt_2.10/3.2.0/scopt_2.10-3.2.0.pom[0m
+[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] com.github.scopt#scopt_2.10;3.2.0!scopt_2.10.pom(pom.original) (618ms)[0m
+[0m[[0mdebug[0m] [0m		tried /home/vagrant/.ivy2/local/com.github.scopt/scopt_2.10/3.2.0/jars/scopt_2.10.jar[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/com/github/scopt/scopt_2.10/3.2.0/scopt_2.10-3.2.0.jar[0m
+[0m[[0mdebug[0m] [0m	found com.github.scopt#scopt_2.10;3.2.0 in public[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies org.scalastyle#scalastyle_2.10;0.4.0->com.github.scopt#scopt_2.10;3.2.0 [compile->compile(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.github.scopt#scopt_2.10;3.2.0->org.scala-lang#scala-library;2.10.3 [compile->master(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.github.scopt#scopt_2.10;3.2.0->org.scala-lang#scala-library;2.10.4 [compile->master(*)][0m
@@ -297,26 +339,41 @@
 [0m[[0mdebug[0m] [0m	resolved ivy file produced in cache[0m
 [0m[[0mdebug[0m] [0m:: downloading artifacts ::[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#scala-library;2.10.4!scala-library.jar[0m
-[0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scalastyle#scalastyle_2.10;0.4.0!scalastyle_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scalariform#scalariform_2.10;0.1.4!scalariform_2.10.jar[0m
-[0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.github.scopt#scopt_2.10;3.2.0!scopt_2.10.jar[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scalastyle/scalastyle_2.10/0.4.0/scalastyle_2.10-0.4.0.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scalastyle/scalastyle_2.10/0.4.0/scalastyle_2.10-0.4.0.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scalastyle/scalastyle_2.10/0.4.0/scalastyle_2.10-0.4.0.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scalastyle/scalastyle_2.10/0.4.0/scalastyle_2.10-0.4.0.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scalastyle/scalastyle_2.10/0.4.0/scalastyle_2.10-0.4.0.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scalastyle#scalastyle_2.10;0.4.0!scalastyle_2.10.jar (1540ms)[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scalariform/scalariform_2.10/0.1.4/scalariform_2.10-0.1.4.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scalariform/scalariform_2.10/0.1.4/scalariform_2.10-0.1.4.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scalariform/scalariform_2.10/0.1.4/scalariform_2.10-0.1.4.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scalariform/scalariform_2.10/0.1.4/scalariform_2.10-0.1.4.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scalariform/scalariform_2.10/0.1.4/scalariform_2.10-0.1.4.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scalariform#scalariform_2.10;0.1.4!scalariform_2.10.jar (2559ms)[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/com/github/scopt/scopt_2.10/3.2.0/scopt_2.10-3.2.0.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/com/github/scopt/scopt_2.10/3.2.0/scopt_2.10-3.2.0.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/com/github/scopt/scopt_2.10/3.2.0/scopt_2.10-3.2.0.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/com/github/scopt/scopt_2.10/3.2.0/scopt_2.10-3.2.0.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/com/github/scopt/scopt_2.10/3.2.0/scopt_2.10-3.2.0.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] com.github.scopt#scopt_2.10;3.2.0!scopt_2.10.jar (648ms)[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#scala-compiler;2.10.4!scala-compiler.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#scala-reflect;2.10.4!scala-reflect.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#jline;2.10.4!jline.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.fusesource.jansi#jansi;1.4!jansi.jar[0m
-[0m[[0mdebug[0m] [0m:: resolution report :: resolve 271ms :: artifacts dl 22ms[0m
-[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT compile produced in /Users/vikram/Code/186/staff/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-compile.xml[0m
-[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT runtime produced in /Users/vikram/Code/186/staff/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-runtime.xml[0m
-[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT test produced in /Users/vikram/Code/186/staff/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-test.xml[0m
-[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT provided produced in /Users/vikram/Code/186/staff/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-provided.xml[0m
-[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT optional produced in /Users/vikram/Code/186/staff/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-optional.xml[0m
-[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT compile-internal produced in /Users/vikram/Code/186/staff/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-compile-internal.xml[0m
-[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT runtime-internal produced in /Users/vikram/Code/186/staff/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-runtime-internal.xml[0m
-[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT test-internal produced in /Users/vikram/Code/186/staff/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-test-internal.xml[0m
-[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT plugin produced in /Users/vikram/Code/186/staff/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-plugin.xml[0m
-[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT sources produced in /Users/vikram/Code/186/staff/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-sources.xml[0m
-[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT docs produced in /Users/vikram/Code/186/staff/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-docs.xml[0m
-[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT pom produced in /Users/vikram/Code/186/staff/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-pom.xml[0m
-[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT scala-tool produced in /Users/vikram/Code/186/staff/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-scala-tool.xml[0m
-[0m[[0mdebug[0m] [0m	resolve done (271ms resolve - 22ms download)[0m
+[0m[[0mdebug[0m] [0m:: resolution report :: resolve 3466ms :: artifacts dl 4765ms[0m
+[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT compile produced in /vagrant/group162/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-compile.xml[0m
+[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT runtime produced in /vagrant/group162/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-runtime.xml[0m
+[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT test produced in /vagrant/group162/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-test.xml[0m
+[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT provided produced in /vagrant/group162/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-provided.xml[0m
+[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT optional produced in /vagrant/group162/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-optional.xml[0m
+[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT compile-internal produced in /vagrant/group162/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-compile-internal.xml[0m
+[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT runtime-internal produced in /vagrant/group162/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-runtime-internal.xml[0m
+[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT test-internal produced in /vagrant/group162/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-test-internal.xml[0m
+[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT plugin produced in /vagrant/group162/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-plugin.xml[0m
+[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT sources produced in /vagrant/group162/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-sources.xml[0m
+[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT docs produced in /vagrant/group162/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-docs.xml[0m
+[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT pom produced in /vagrant/group162/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-pom.xml[0m
+[0m[[0mdebug[0m] [0m	report for org.apache.spark#spark-style_2.10;0.1-SNAPSHOT scala-tool produced in /vagrant/group162/hw2/project/spark-style/target/resolution-cache/reports/org.apache.spark-spark-style_2.10-scala-tool.xml[0m
+[0m[[0mdebug[0m] [0m	resolve done (3466ms resolve - 4765ms download)[0m
 [0m[[0minfo[0m] [0mDone updating.[0m
