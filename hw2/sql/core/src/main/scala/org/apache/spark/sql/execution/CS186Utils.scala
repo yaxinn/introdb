@@ -194,12 +194,21 @@ object CachingIteratorGenerator {
 
         def hasNext() = {
           // IMPLEMENT ME
-          false
+          input.hasNext
+          // false
         }
 
         def next() = {
           // IMPLEMENT ME
-          null
+          var row = input.next()
+          var prProject = preUdfProjection.apply(row)
+          var poProject = postUdfProjection.apply(row)
+          var key = cacheKeyProjection.apply(row)
+
+          if (!cache.containsKey(key)){
+            cache.put(key, udfProject.apply(row))
+          }
+          Row.fromSeq(prProject ++ cache.get(key) ++ poProject)
         }
       }
     }
