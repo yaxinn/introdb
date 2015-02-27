@@ -32,12 +32,6 @@ AS
 CREATE VIEW q1d(id, name, avg_amount)
 AS
   -- SELECT 1,1,1 -- replace this line
-  -- SELECT cmte_id, name, avg
-  --   FROM (SELECT cmte_id, name, AVG(transaction_amt)
-  --     FROM committee_contributions
-  --     WHERE transaction_amt > 5000
-  --     GROUP BY cmte_id, name) AS Q1C
-  --   WHERE ave > 10000
   SELECT id, name, avg_amount
     FROM q1c
     WHERE avg_amount > 10000
@@ -61,7 +55,8 @@ AS
 -- Question 3
 CREATE VIEW q3(name)
 AS
-  SELECT 1 -- replace this line
+  -- SELECT 1 -- replace this line
+
 ;
 
 -- Question 4.
