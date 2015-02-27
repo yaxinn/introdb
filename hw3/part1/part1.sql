@@ -68,7 +68,16 @@ AS
 -- Question 4.
 CREATE VIEW q4 (name)
 AS
-  SELECT 1 -- replace this line
+  -- SELECT 1 -- replace this line
+  WITH stat AS (SELECT cand_id              
+                  FROM committee_contributions 
+                  GROUP BY cand_id, cmte_id),
+       tot AS (SELECT COUNT(*)*0.01 as total FROM committees),
+       calc AS (SELECT cand_id, COUNT(cand_id), total
+                  FROM stat, tot
+                  GROUP BY cand_id, total)
+  SELECT *
+    FROM  calc
 ;
 
 -- Question 5
