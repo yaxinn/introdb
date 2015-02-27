@@ -97,10 +97,31 @@ CREATE VIEW q5 (name, total_pac_donations) AS
 -- Question 6
 CREATE VIEW q6 (id) AS
   -- SELECT 1 -- replace this line
-  
+  WITH contri AS (SELECT c.cand_id, c.entity_tp
+                    FROM committee_contributions c
+                    WHERE c.entity_tp='PAC' OR c.entity_tp='CCM'
+                    GROUP BY c.cand_id, c.entity_tp)
+  SELECT cand_id
+  FROM (SELECT cand_id, COUNT(cand_id)
+          FROM contri
+          GROUP BY cand_id) AS reduced(cand_id, count)
+  WHERE count=2
 ;
 
 -- Question 7
 CREATE VIEW q7 (cand_name1, cand_name2) AS
-  SELECT 1,1 -- replace this line
+  -- SELECT 1,1 -- replace this line
+  WITH cand_RI_cmte AS (SELECT cand_id, cmte_id
+                          FROM committee_contributions 
+                          WHERE state='RI'
+                          GROUP BY cand_id, cmte_id),
+       cand_share_join AS (SELECT a.cand_id AS cand_id1, b.cand_id AS cand_id2
+                            FROM cand_RI_cmte a JOIN cand_RI_cmte b
+                            ON a.cmte_id=b.cmte_id
+                            WHERE a.cand_id!=b.cand_id
+                            GROUP BY cand_id1, cand_id2)
+  SELECT a.name, b.name
+    FROM candidates a, candidates b, cand_share_join c
+    WHERE c.cand_id1=a.id AND c.cand_id2=b.id
+    ORDER BY a.name
 ;
