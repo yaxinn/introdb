@@ -56,7 +56,13 @@ AS
 CREATE VIEW q3(name)
 AS
   -- SELECT 1 -- replace this line
-
+  SELECT c.name
+    FROM committees c
+    WHERE c.id NOT IN 
+      (SELECT s.cmte_id
+        FROM committee_contributions s
+        WHERE s.cand_id=(SELECT id FROM candidates WHERE name='OBAMA, BARACK'))
+    ORDER BY c.name
 ;
 
 -- Question 4.
