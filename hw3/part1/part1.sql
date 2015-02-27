@@ -42,10 +42,9 @@ CREATE VIEW q2(from_name, to_name)
 AS
   -- SELECT 1,1 -- replace this line
   SELECT from_name, to_name
-    FROM (SELECT d.name, c.name
+    FROM (SELECT c.name, d.name
             FROM intercommittee_transactions i, committees c, committees d
-            WHERE i.cmte_id=d.id and d.pty_affiliation='DEM' and
-                  i.other_id=c.id and c.pty_affiliation='DEM'
+            WHERE i.cmte_id=d.id and d.pty_affiliation='DEM' and i.other_id=c.id and c.pty_affiliation='DEM'
             GROUP BY (d.name, c.name), d.name, c.name
             ORDER by COUNT((d.name, c.name)) DESC
             LIMIT 10) AS topten(from_name, to_name)
@@ -76,18 +75,29 @@ AS
        calc AS (SELECT cand_id, COUNT(cand_id), total
                   FROM stat, tot
                   GROUP BY cand_id, total)
-  SELECT *
-    FROM  calc
+  SELECT b.name
+    FROM  calc a, candidates b
+    WHERE a.cand_id=b.id AND a.count > a.total
+    ORDER BY b.name
 ;
 
 -- Question 5
 CREATE VIEW q5 (name, total_pac_donations) AS
-  SELECT 1,1 -- replace this line
+  -- SELECT 1,1 -- replace this line
+  WITH org AS (SELECT cmte_id, transaction_amt 
+                FROM individual_contributions
+                WHERE entity_tp='ORG')
+  SELECT c.name, SUM(o.transaction_amt)
+    FROM committees c LEFT OUTER JOIN org o
+    ON c.id=o.cmte_id
+    GROUP BY c.id, c.name
+    ORDER BY c.name
 ;
 
 -- Question 6
 CREATE VIEW q6 (id) AS
-  SELECT 1 -- replace this line
+  -- SELECT 1 -- replace this line
+  
 ;
 
 -- Question 7
