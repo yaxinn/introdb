@@ -3,31 +3,59 @@ DROP VIEW IF EXISTS q1a, q1b, q1c, q1d, q2, q3, q4, q5, q6, q7;
 -- Question 1a
 CREATE VIEW q1a(id, amount)
 AS
-  SELECT 1,1 -- replace this line
+  -- SELECT 1,1 -- replace this line
+  SELECT cmte_id, transaction_amt 
+    FROM committee_contributions 
+    WHERE transaction_amt > 5000
 ;
 
 -- Question 1b
 CREATE VIEW q1b(id, name, amount)
 AS
-  SELECT 1,1,1 -- replace this line
+  -- SELECT 1,1,1 -- replace this line
+  SELECT cmte_id, name, transaction_amt 
+    FROM committee_contributions 
+    WHERE transaction_amt > 5000
 ;
 
 -- Question 1c
 CREATE VIEW q1c(id, name, avg_amount)
 AS
-  SELECT 1,1,1 -- replace this line
+  -- SELECT 1,1,1 -- replace this line
+  SELECT cmte_id, name, AVG(transaction_amt)
+    FROM committee_contributions
+    WHERE transaction_amt > 5000
+    GROUP BY cmte_id, name
 ;
 
 -- Question 1d
 CREATE VIEW q1d(id, name, avg_amount)
 AS
-  SELECT 1,1,1 -- replace this line
+  -- SELECT 1,1,1 -- replace this line
+  -- SELECT cmte_id, name, avg
+  --   FROM (SELECT cmte_id, name, AVG(transaction_amt)
+  --     FROM committee_contributions
+  --     WHERE transaction_amt > 5000
+  --     GROUP BY cmte_id, name) AS Q1C
+  --   WHERE ave > 10000
+  SELECT id, name, avg_amount
+    FROM q1c
+    WHERE avg_amount > 10000
 ;
 
 -- Question 2
 CREATE VIEW q2(from_name, to_name)
 AS
-  SELECT 1,1 -- replace this line
+  -- SELECT 1,1 -- replace this line
+  SELECT from_name, to_name
+    FROM (SELECT d.name, c.name
+            FROM intercommittee_transactions i, committees c, committees d
+            WHERE i.cmte_id=d.id and d.pty_affiliation='DEM' and
+                  i.other_id=c.id and c.pty_affiliation='DEM'
+            GROUP BY (d.name, c.name), d.name, c.name
+            ORDER by COUNT((d.name, c.name)) DESC
+            LIMIT 10) AS topten(from_name, to_name)
+    ORDER BY from_name
 ;
 
 -- Question 3
