@@ -81,16 +81,20 @@ def maxflow(bfs_max_iterations=float('inf'), flow_max_iterations=float('inf')):
             # Hints: a JOIN would be helpful here. Also check the documentation to
             # see how array concatenation work in Postgres.
             db.execute("""
-                    SELECT ???
+                SELECT p.path || t.path AS path, p.nodes || t.nodes[2] AS nodes
                     INTO tmp
-                    ???;
+                    FROM paths p RIGHT JOIN (SELECT ARRAY[e.id] AS path, array[e.src, e.dst] AS nodes
+                                                FROM edge e, paths p
+                                                WHERE e.src=p.nodes[array_length(p.nodes, 1)] AND e.capacity!=0 AND NOT array[p.nodes] @> array[e.dst])
+                                            AS t(path, nodes)
+                    ON p.nodes[array_length(p.nodes, 1)]=t.nodes[1];
 
-                    DROP TABLE IF EXISTS paths CASCADE;
-                    ALTER TABLE tmp RENAME TO paths;
-                    CREATE VIEW terminated_paths AS
-                        SELECT *
-                        FROM paths
-                        WHERE nodes[array_length(nodes,1)] = (SELECT MAX(id) FROM node);
+                DROP TABLE IF EXISTS paths CASCADE;
+                ALTER TABLE tmp RENAME TO paths;
+                CREATE VIEW terminated_paths AS
+                    SELECT *
+                    FROM paths
+                    WHERE nodes[array_length(nodes,1)] = (SELECT MAX(id) FROM node);
                     """)
 
             # If we've exhausted all potential paths and found nothing, we terminate
@@ -118,7 +122,10 @@ def maxflow(bfs_max_iterations=float('inf'), flow_max_iterations=float('inf')):
                 SELECT unnest(path) AS path_edge FROM chosen_route
             ),
             constraining_capacity(capacity) AS (
-                ???
+                SELECT MIN(capacity)
+                    FROM (SELECT e.capacity 
+                            FROM edge e, path_edges p
+                            WHERE e.id=p.path_edge) AS capa(capacity)
             )
             SELECT path_edge AS edge_id, (SELECT * FROM constraining_capacity) as flow 
             INTO flow_to_route FROM path_edges;
@@ -128,12 +135,18 @@ def maxflow(bfs_max_iterations=float('inf'), flow_max_iterations=float('inf')):
         # Then, update the `edges` table
         db.execute("""
             WITH updates(id, new_capacity) AS (
-                ???
+                SELECT f.edge_id, e.capacity-f.flow
+                    FROM flow_to_route f, edge e
+                    WHERE f.edge_id=e.id
+                UNION
+                SELECT r.reverse_id, e.capacity+f.flow
+                    FROM flow_to_route f, edge e, flip_edge r
+                    WHERE f.edge_id=r.forward_id AND r.reverse_id=e.id
             )
             UPDATE edge
-              SET ???
+              SET capacity=updates.new_capacity
               FROM updates
-              WHERE ???;
+              WHERE edge.id=updates.id;
             """)
 
         # DO NOT EDIT
