@@ -50,18 +50,26 @@ trait SymmetricHashJoin {
    * However, note that if you do:
    *  1. we will have a harder time helping you debug your code.
    *  2. Iterators must implement next and hasNext. If you do not implement those two methods, your code will not compile.
-   *
+   *2q
    * **NOTE**: You should return JoinedRows, which take two input rows and returns the concatenation of them.
    * e.g., `new JoinedRow(row1, row2)`
    *
-   * @param leftIter an iterator for the left input
-   * @param rightIter an iterator for th right input
+   * @param leftIter an iterator for the left input ( inner table )
+   * @param rightIter an iterator for th right input ( outer table )
    * @return iterator for the result of the join
    */
   protected def symmetricHashJoin(leftIter: Iterator[Row], rightIter: Iterator[Row]): Iterator[Row] = {
     new Iterator[Row] {
       /* Remember that Scala does not have any constructors. Whatever code you write here serves as a constructor. */
       // IMPLEMENT ME
+      var innerIter = leftIter
+      var outerIter = rightIter
+      var currentStreamingRow : Row = null
+      var foundMatch : Row = null
+      var innerHashMap = new HashMap[Row, Row]()
+      var outerHashMap = new HashMap[Row, Row]()
+      var innerKeyGenerator = leftKeyGenerator
+      var outerKeyGenerator = rightKeyGenerator
 
       /**
        * This method returns the next joined tuple.
@@ -70,6 +78,7 @@ trait SymmetricHashJoin {
        */
       override def next() = {
         // IMPLEMENT ME
+        foundMatch
       }
 
       /**
@@ -79,6 +88,7 @@ trait SymmetricHashJoin {
        */
       override def hasNext() = {
         // IMPLEMENT ME
+        findNextMatch()
       }
 
       /**
@@ -86,6 +96,17 @@ trait SymmetricHashJoin {
        */
       private def switchRelations() = {
         // IMPLEMENT ME
+        var tempIter = innerIter
+        innerIter = outerIter
+        outerIter = tempIter
+
+        var tempHashMap = innerHashMap
+        innerHashMap = outerHashMap
+        outerHashMap = tempHashMap
+
+        var tempKeyGenerator = innerKeyGenerator
+        innerKeyGenerator = outerKeyGenerator
+        outerKeyGenerator = tempKeyGenerator
       }
 
       /**
@@ -95,6 +116,20 @@ trait SymmetricHashJoin {
        */
       def findNextMatch(): Boolean = {
         // IMPLEMENT ME
+        if(innerIter.hasNext) {
+            currentStreamingRow = innerIter.next()
+            innerHashMap.put(innerKeyGenerator.apply(currentStreamingRow), currentStreamingRow)
+            if(outerHashMap.contains(innerKeyGenerator.apply(currentStreamingRow))) {
+                var outerRow: Row = outerHashMap.apply(outerKeyGenerator.apply(currentStreamingRow))
+                foundMatch = new JoinedRow(currentStreamingRow, outerRow)
+                true
+            } else {
+                switchRelations()
+                findNextMatch()
+            }
+        } else {
+            false
+        }
       }
     }
   }
