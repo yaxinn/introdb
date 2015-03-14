@@ -14,7 +14,7 @@ Lastly, there is a lot of code in this directory. Please look [here](https://git
 
 # Spark
 
-Spark is an open-source distributed computing system written in [Scala](http://www.scala-lang.org). The project was started by Ph.D. students from our very own [AMPLab](amplab.cs.berkeley.edu) and is an integral part of the [Berkeley Data Analytics Stack](https://amplab.cs.berkeley.edu/software/) (BDAS—affectionately pronounced "bad-ass").
+Spark is an open-source distributed computing system written in [Scala](http://www.scala-lang.org). The project was started by Ph.D. students from our very own [AMPLab](https://amplab.cs.berkeley.edu) and is an integral part of the [Berkeley Data Analytics Stack](https://amplab.cs.berkeley.edu/software/) (BDAS—affectionately pronounced "bad-ass").
 
 Like Hadoop MapReduce, Spark is designed to run functions over large collections of data, by supporting a simplified set of high-level data processing operations akin to the iterators we've been learning about in class. One of the most common uses of such systems is to implement parallel query processing in high level languages such as SQL. In fact, many recent research and development efforts in Spark have gone towards supporting a scalable and interactive relational database abstraction.
 
@@ -100,15 +100,15 @@ Follow these instructions to update your VM:
 
 In your VM, please first clone your group repo.
 
-<pre><code>git clone https://github.com/cs186-spring15/xxxx.git
+<pre><code>git clone https://github.com/cs186-spring15/group-xxx.git
 </code></pre>
 
 where `xxxx` will be your group repo name.
 
-Next, please ensure that you have the correct remotes. Your personal repo might be called `origin` or `personal` or something.
+Next, please ensure that you have the correct remotes. Your group repo might be called `origin` or `group` or something.
 <pre><code>$ git remote -v
-origin	https://github.com/cs186-spring15/xx (fetch)
-origin	https://github.com/cs186-spring15/xx (push)
+origin	https://github.com/cs186-spring15/group-xxx (fetch)
+origin	https://github.com/cs186-spring15/group-xxx (push)
 course	https://github.com/cs186-spring15/course (fetch)
 course	https://github.com/cs186-spring15/course (push)
 </code></pre>
@@ -184,11 +184,15 @@ In order to run our tests, we have provided a simple Makefile. In order to run t
 
 ### Assignment autograder
 
-We will provide an autograder on this assignment. To run the autograder on your assignment, push a branch called `ag/hw2` to your personal repository. Keep in mind that you must still submit this assignment by pushing a branch called `release/hw2`: **we will not grade submissions to the autograder!**
+We will provide an autograder on this assignment. To run the autograder on your assignment, push a branch called `ag/hw2` to your group repository. Keep in mind that you must still submit this assignment by pushing a branch called `release/hw2`: **we will not grade submissions to the autograder!**
 
     $ git checkout -b ag/hw2
     $ git push origin ag/hw2
 
-Our machines will e-mail you the results of the autograder within a few minutes. **Please note that the autograder is not yet set up. We will aim to have it running by early next week.**
+Our machines will e-mail you the results of the autograder within an hour. If you do not receive a response after an hour, please *first* double-check that all your files are in the right place and that you pushed a commit to `ag/hw2`, and *then* notify us that you haven't received a response.
+
+### Assignment submission
+
+To submit your assignment, as before, push a branch containing the commit you want us to grade to `release/hw2`. This is separate from the autograder; pushing a commit here will not trigger the autograder, and vice-versa.
 
 Good luck!
