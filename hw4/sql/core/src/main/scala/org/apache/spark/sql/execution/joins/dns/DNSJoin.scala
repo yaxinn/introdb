@@ -66,7 +66,18 @@ trait DNSJoin {
   def hashJoin(input: Iterator[Row]): Iterator[Row] = {
     new Iterator[Row] {
       // IMPLEMENT ME
+      var reqBuffer = new ConcurrentHashMap[Int, Row]()
+      var respBuffer = new ConcurrentHashMap[Int, Row]()
+      var joined = new JavaArrayList[Row]()
+      var i = 1
+      var position = 0
+      var joinedRow
 
+      for ( i <- 1 to requestBufferSize ) {
+        if ( input.hasNext )
+          makeRequest()
+      }
+      
       /**
        * This method returns the next joined tuple.
        *
@@ -74,7 +85,25 @@ trait DNSJoin {
        */
       override def next() = {
         // IMPLEMENT ME
-        null
+        if ( position >= joined.size() ) {
+          for (Int key: respBuffer.keys()){
+            if (reqBuffer.contains(key) ){
+              joined.add(JoinedRow(reqBuffer.get(key), respBuffer.get(key)))
+              reqBuffer.remove(key)
+              if (input.hasNext) {
+                var newInput = input.next()
+                if (respBuffer.contains(leftKeyGenerator.apply(newInput)))
+                  joined.add(JoinedRow(reqBuffer.get(key), respBuffer.get(key)))
+                else makeRequest()
+              }
+            }
+          }
+        }
+        if (position < joined.size()) {
+          joinedRow = joined.get(position)
+          position += 1
+          joinedRow
+        }
       }
 
       /**
@@ -84,7 +113,7 @@ trait DNSJoin {
        */
       override def hasNext() = {
         // IMPLEMENT ME
-        false
+        ! (position == joined.size() && reqBuffer.size() == 0)
       }
 
 
@@ -93,6 +122,11 @@ trait DNSJoin {
        */
       private def makeRequest() = {
         // IMPLEMENT ME
+        var inputRow = input.next() 
+        var ip = inputRow.getString(0)
+        var key = leftKeyGenerator (inputRow)
+        reqBuffer.put(key, inputRow)
+        DNSLookup.lookup(key, ip, respBuffer, reqBuffer)
       }
     }
   }
