@@ -69,9 +69,9 @@ trait DNSJoin {
       var reqBuffer = new ConcurrentHashMap[Int, Row]()
       var respBuffer = new ConcurrentHashMap[Int, Row]()
       var joined = new JavaArrayList[Row]()
-      var i = 1
-      var position = 0
-      var joinedRow
+      var i: Int = 1
+      var position: Int = 0
+      var joinedRow: Row = null
 
       for ( i <- 1 to requestBufferSize ) {
         if ( input.hasNext )
