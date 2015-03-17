@@ -121,9 +121,8 @@ trait SymmetricHashJoin {
           currentStreamingRow = innerIter.next()
           var rowKey = innerKeyGenerator.apply(currentStreamingRow)
 
-          if ( !innerHashMap.contains(rowKey)) {
+          if ( !innerHashMap.contains(rowKey))
             innerHashMap.put(rowKey, new CompactBuffer[Row]())
-          }
 
           var existsMatchList = innerHashMap.apply(rowKey)
           existsMatchList += currentStreamingRow.copy()
