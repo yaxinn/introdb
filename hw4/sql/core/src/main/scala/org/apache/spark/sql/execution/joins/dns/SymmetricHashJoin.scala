@@ -65,11 +65,11 @@ trait SymmetricHashJoin {
       var innerIter = leftIter
       var outerIter = rightIter
       var currentStreamingRow : Row = null
-      var foundMatch : Row = null
-      var innerHashMap = new HashMap[Row, Row]()
-      var outerHashMap = new HashMap[Row, Row]()
+      var innerHashMap = new HashMap[Row, CompactBuffer[Row]]()
+      var outerHashMap = new HashMap[Row, CompactBuffer[Row]]()
       var innerKeyGenerator = leftKeyGenerator
       var outerKeyGenerator = rightKeyGenerator
+      var bufIter: Iterator[Row] = null
 
       /**
        * This method returns the next joined tuple.
@@ -78,7 +78,7 @@ trait SymmetricHashJoin {
        */
       override def next() = {
         // IMPLEMENT ME
-        foundMatch
+        new JoinedRow(currentStreamingRow, bufIter.next())
       }
 
       /**
@@ -88,7 +88,8 @@ trait SymmetricHashJoin {
        */
       override def hasNext() = {
         // IMPLEMENT ME
-        findNextMatch()
+        if (bufIter != null && bufIter.hasNext) true
+        else findNextMatch()
       }
 
       /**
@@ -117,18 +118,29 @@ trait SymmetricHashJoin {
       def findNextMatch(): Boolean = {
         // IMPLEMENT ME
         if(innerIter.hasNext) {
-            currentStreamingRow = innerIter.next()
-            innerHashMap.put(innerKeyGenerator.apply(currentStreamingRow), currentStreamingRow)
-            if(outerHashMap.contains(innerKeyGenerator.apply(currentStreamingRow))) {
-                var outerRow: Row = outerHashMap.apply(outerKeyGenerator.apply(currentStreamingRow))
-                foundMatch = new JoinedRow(currentStreamingRow, outerRow)
-                true
-            } else {
-                switchRelations()
-                findNextMatch()
-            }
+          currentStreamingRow = innerIter.next()
+          var rowKey = innerKeyGenerator.apply(currentStreamingRow)
+
+          if ( !innerHashMap.contains(rowKey)) {
+            innerHashMap.put(rowKey, new CompactBuffer[Row]())
+          }
+
+          var existsMatchList = innerHashMap.apply(rowKey)
+          existsMatchList += currentStreamingRow.copy()
+
+          // key of currentStreamingRow when apply the hash function of outer relation
+          rowKey = outerKeyGenerator.apply(currentStreamingRow)
+
+          if ( outerHashMap.contains(rowKey)) {
+            existsMatchList = outerHashMap.apply(rowKey)
+            bufIter = existsMatchList.iterator
+            true
+          } else {
+            switchRelations()
+            findNextMatch()
+          }
         } else {
-            false
+          false
         }
       }
     }
