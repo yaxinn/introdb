@@ -68,10 +68,12 @@ trait DNSJoin {
       // IMPLEMENT ME
       var reqBuffer = new ConcurrentHashMap[Int, Row]()
       var respBuffer = new ConcurrentHashMap[Int, Row]()
-      var joined = new JavaArrayList[Row]()
-      var i: Int = 1
-      var position: Int = 0
-      var joinedRow: Row = null
+      var counter = 0
+      
+      // var joined = new JavaArrayList[Row]()
+      // var i: Int = 1
+      // var position: Int = 0
+      // var joinedRow: Row = null
 
       for ( i <- 1 to requestBufferSize ) {
         if ( input.hasNext )
@@ -122,11 +124,22 @@ trait DNSJoin {
        */
       private def makeRequest() = {
         // IMPLEMENT ME
-        var inputRow = input.next() 
-        var ip = inputRow.getString(0)
-        var key = leftKeyGenerator (inputRow)
-        reqBuffer.put(key, inputRow)
-        DNSLookup.lookup(key, ip, respBuffer, reqBuffer)
+        
+        // Get input Row
+        var inputRow = input.next()
+
+        // Get key
+        var key = leftKeyGenerator(inputRow)
+        
+        // Get IP address 
+        var ip = key.getString(0)
+
+        // put request and input row to request buffer
+        reqBuffer.put(counter, inputRow)
+
+        // Lookup and put request number and result to response buffer on success.
+        // Remove request from request buffer on failure
+        DNSLookup.lookup(counter, ip, respBuffer, reqBuffer)
       }
     }
   }
