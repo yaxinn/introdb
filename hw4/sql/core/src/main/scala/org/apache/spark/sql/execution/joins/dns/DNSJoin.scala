@@ -68,14 +68,20 @@ trait DNSJoin {
       // IMPLEMENT ME
       var reqBuffer = new ConcurrentHashMap[Int, Row]()
       var respBuffer = new ConcurrentHashMap[Int, Row]()
-      var joined = new JavaArrayList[Row]()
-      var i: Int = 1
-      var position: Int = 0
-      var joinedRow: Row = null
+      var respCache = new JavaHashMap[Row, Row]()
+      var requests = new JavaArrayList[Row]()
+      
+      var reqNum: Int = 0
+      var inputRow: Row = null
+      var idx: Int = 0
 
-      for ( i <- 1 to requestBufferSize ) {
-        if ( input.hasNext )
+      while (input.hasNext && reqNum < requestBufferSize ) {
+        inputRow = input.next()
+        if (!requests.contains(inputRow)){
           makeRequest()
+          reqNum += 1
+        }
+        requests.add(inputRow)
       }
       
       /**
@@ -85,25 +91,46 @@ trait DNSJoin {
        */
       override def next() = {
         // IMPLEMENT ME
-        if ( position >= joined.size() ) {
-          for (Int key: respBuffer.keys()){
-            if (reqBuffer.contains(key) ){
-              joined.add(JoinedRow(reqBuffer.get(key), respBuffer.get(key)))
-              reqBuffer.remove(key)
-              if (input.hasNext) {
-                var newInput = input.next()
-                if (respBuffer.contains(leftKeyGenerator.apply(newInput)))
-                  joined.add(JoinedRow(reqBuffer.get(key), respBuffer.get(key)))
-                else makeRequest()
+        var key = leftKeyGenerator.apply (requests.get(idx))
+
+        if (respCache.size() > 0 && respCache.containsKey(key)) {
+          idx += 1
+          respCache.get(key)
+        }
+        else {
+          // busy waiting
+          while ( reqBuffer.size() != respBuffer.size()) {}
+
+          var respIter = respBuffer.keySet().iterator()
+          
+          while (respIter.hasNext) {
+            var bKey = respIter.next()
+            var response = respBuffer.get(bKey)
+            var request = reqBuffer.get(bKey)
+
+            respCache.put(leftKeyGenerator.apply(request), new JoinedRow(request, response))
+
+            reqBuffer.remove(bKey)
+            respBuffer.remove(bKey)
+
+            // fetch next input
+            if (input.hasNext) {
+              inputRow = input.next()
+              // make a new request only if we haven't already made one
+              if (!requests.contains(inputRow)){ 
+                reqNum = bKey
+                requests.add(inputRow)
+                makeRequest()
               }
             }
           }
+          if (respCache.containsKey(key)) {
+            idx += 1
+            respCache.get(key)
+          }
+          else null
         }
-        if (position < joined.size()) {
-          joinedRow = joined.get(position)
-          position += 1
-          joinedRow
-        }
+
       }
 
       /**
@@ -113,7 +140,7 @@ trait DNSJoin {
        */
       override def hasNext() = {
         // IMPLEMENT ME
-        ! (position == joined.size() && reqBuffer.size() == 0)
+        idx < requests.size()
       }
 
 
@@ -122,11 +149,9 @@ trait DNSJoin {
        */
       private def makeRequest() = {
         // IMPLEMENT ME
-        var inputRow = input.next() 
         var ip = inputRow.getString(0)
-        var key = leftKeyGenerator (inputRow)
-        reqBuffer.put(key, inputRow)
-        DNSLookup.lookup(key, ip, respBuffer, reqBuffer)
+        reqBuffer.put(reqNum, inputRow)
+        DNSLookup.lookup(reqNum, ip, respBuffer, reqBuffer)
       }
     }
   }
