@@ -93,16 +93,13 @@ trait DNSJoin {
         // IMPLEMENT ME
         var key = leftKeyGenerator.apply (requests.get(idx))
 
-        if (respCache.size() > 0 && respCache.containsKey(key)) {
-          idx += 1
-          respCache.get(key)
-        }
-        else {
+        if (!(respCache.size() > 0 && respCache.containsKey(key))){
           // busy waiting
           while ( reqBuffer.size() != respBuffer.size()) {}
 
           var respIter = respBuffer.keySet().iterator()
           
+          // join
           while (respIter.hasNext) {
             var bKey = respIter.next()
             var response = respBuffer.get(bKey)
@@ -124,13 +121,12 @@ trait DNSJoin {
               }
             }
           }
-          if (respCache.containsKey(key)) {
-            idx += 1
-            respCache.get(key)
-          }
-          else null
         }
-
+        if (respCache.containsKey(key)) {
+          idx += 1
+          respCache.get(key)
+        }
+        else null
       }
 
       /**
