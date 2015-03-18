@@ -68,6 +68,7 @@ trait DNSJoin {
       // IMPLEMENT ME
       var reqBuffer = new ConcurrentHashMap[Int, Row]()
       var respBuffer = new ConcurrentHashMap[Int, Row]()
+      var waitBuffer = new HashMap[Row, new ArrayList[Int]()]()
       var counter = 0
       
       // var joined = new JavaArrayList[Row]()
@@ -131,15 +132,25 @@ trait DNSJoin {
         // Get key
         var key = leftKeyGenerator(inputRow)
         
-        // Get IP address 
+        // Get IP address that I need to make a request 
         var ip = key.getString(0)
 
-        // put request and input row to request buffer
-        reqBuffer.put(counter, inputRow)
+        // Check if IP exists in waitBuffer
+        if(waitBuffer.containsKey(inputRow)) {
+            // add the request number to waitBuffer with corresponding key
 
-        // Lookup and put request number and result to response buffer on success.
-        // Remove request from request buffer on failure
-        DNSLookup.lookup(counter, ip, respBuffer, reqBuffer)
+        } else {
+
+            // put request and input row to request buffer
+            reqBuffer.put(counter, inputRow)
+            
+            // put row and arrayList to waitbuffer
+            //waitBuffer.put(inputRow, new ArrayList)
+
+            // Lookup and put request number and result to response buffer on success.
+            // Remove request from request buffer on failure
+            DNSLookup.lookup(counter, ip, respBuffer, reqBuffer)
+        }
       }
     }
   }
