@@ -16,26 +16,24 @@
 <p>Line 8</p>
 <script type="text/javascript">
 	var dataset = [10,12,14,16,18,20,22];
-	var paragraphs = d3.select("body").selectAll("p").data(dataset)
+	var paragraphs = d3.select("body").selectAll("p").data(dataset);
 
 	paragraphs.style("font-size", function(d) {return (d+"px");})
 		.style("font-size", function(d) {return (d+"px");})
 		.style("font-family", "Courier")
-		.style("color", "red")
+		.style("color", "red");
 
 	paragraphs.enter()
 	    .append("p")
 	    .text(function (d,i) {return "Line " + (i+1);})
 		.style("font-size", function(d) {return (d+"px");})
 		.style("font-family", "Courier")
-		.style("color", "red")
+		.style("color", "red");
 
 	paragraphs.exit()
 		.text("null")
 	    .style("color", "blue")
-	    .style("font-style", "italic")
-
-
+	    .style("font-style", "italic");
 </script>
 
 </body>

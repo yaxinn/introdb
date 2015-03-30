@@ -10,12 +10,14 @@
 
 <script type="text/javascript">
 	var dataset = [10,12,14,16,18,20,22];
-	var bars = d3.select("body").select("svg").selectAll("rect").data(dataset)
-	var w = 500
-	var h = 150
+	var bars = d3.select("body").select("svg")
+					.selectAll("rect")
+					.data(dataset);
+	var w = 500;
+	var h = 150;
 
 	// this returns a function that assigns colors to indexes 0..19
-	var colors = d3.scale.category20()
+	var colors = d3.scale.category20();
 
 	bars.enter()
 	    .append("circle")
@@ -23,6 +25,6 @@
 		.attr("cx", function(d,i){return 30 + i*50;}) 
 		.attr("cy", 50)
 		.attr("r",function(d) {return ((d));})
-		.attr("fill", function(d,i) {return colors(i);})
+		.attr("fill", function(d,i) {return colors(i);});
 </script>
 </body>
