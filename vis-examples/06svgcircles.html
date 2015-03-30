@@ -10,8 +10,8 @@
 
 <script type="text/javascript">
 	var dataset = [10,12,14,16,18,20,22];
-	var bars = d3.select("body").select("svg")
-					.selectAll("rect")
+	var circles = d3.select("body").select("svg")
+					.selectAll("circle")
 					.data(dataset);
 	var w = 500;
 	var h = 150;
@@ -19,7 +19,7 @@
 	// this returns a function that assigns colors to indexes 0..19
 	var colors = d3.scale.category20();
 
-	bars.enter()
+	circles.enter()
 	    .append("circle")
 		.attr("fill", "teal")
 		.attr("cx", function(d,i){return 30 + i*50;}) 
