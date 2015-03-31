@@ -39,6 +39,23 @@ Once installed, run the following to get the postgresql command line tools in yo
     $ echo 'export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin' >> ~/.bash_profile
     $ source ~/.bash_profile
 
+### Virtualenv (optional)
+We highly encourage you to use a python [virtualenv](https://virtualenv.pypa.io/en/latest/) so you don't pollute your python environment. The Python virtualenv isolates module requirements to a virtual environment, so your global python environment isn't filled with dependencies. There is a bit of setup to get it working.
+
+	$ sudo pip install virtualenv
+	$ sudo pip install virtualenvwrapper
+	$ echo 'export WORKON_HOME=~/Envs' >> ~/.bash_profile
+	$ echo 'source /usr/local/bin/virtualenvwrapper.sh' >> ~/.bash_profile
+	$ mkdir ~/Envs
+	$ source ~/.bash_profile  # for the current session
+	
+Once it's setup, you can create a virtual environment that is stored in the `~/Envs` folder.
+
+	$ mkvirtualenv hw5  # creates the virtual environment -- do this just once for a project
+	$ workon hw5        # loads this virtual environment as the current shell session's python environment
+	(hw5) $
+
+Now, install all your python dependencies with `pip` inside of the virtualenv you created. New shell sessions must call `workon hw5` in order to load the `hw5` python virtual environment.
 
 ### Everyone
 To get started, you'll need to bootstrap the database (courtesy of hw3). Continue reading through the `README` as you wait for this to download (it takes a bit of time).
@@ -48,7 +65,7 @@ To get started, you'll need to bootstrap the database (courtesy of hw3). Continu
 
 This will populate a database that is configured with credentials accessible by the Flask web service.
 
-There are a few python packages needed before we can begin. We highly encourage you to use a python [virtualenv](https://virtualenv.pypa.io/en/latest/) so you don't pollute your python environment.
+There are a few python packages needed before we can begin.
 
 You can install the requirements with [`pip`](https://pip.pypa.io/en/latest/):
 
