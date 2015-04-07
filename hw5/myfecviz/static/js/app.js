@@ -24,7 +24,6 @@ var DashboardController = function(mapSelection, histogramSelection, dependencie
         dependencies.convertStateCodeToName,
         this.dispatch
     );
-
     this.transactionHistogram = new TransactionHistogram(histogramSelection, this.dispatch);
 };
 
@@ -111,5 +110,16 @@ DashboardController.prototype.processChanges = function () {
  */
 DashboardController.prototype.filterTransactionsByMapSelection = function () {
     // Implement
-    return [];
+    // return [];
+    var that = this;
+
+    var filterByMapSelections = function (d) {
+        if (that.usCashMap.hasStateInSelection(d['state'])) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+    
+    return this.allTransactions.filter(filterByMapSelections);
 };

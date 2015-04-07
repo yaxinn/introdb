@@ -15,7 +15,7 @@
 var USCashMap = function (selector, usTopoJSON, stateIdToStateCodeMap, stateNameMap, dispatcher) {
     this.dispatch = dispatcher;  // for triggering events
     this.selector = selector;
-
+    
     // Store height and width parameters
     this.width = 740;
     this.height = 500;
