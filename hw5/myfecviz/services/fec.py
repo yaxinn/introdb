@@ -29,11 +29,16 @@ def get_all_transaction_amounts():
 
     :return: List of dictionaries with 'state' and 'amount' keys
     """
-    raise NotImplementedError('Needs implementation')
+    # raise NotImplementedError('Needs implementation')
+    # return []
     # Execute database query
+    db.execute("""SELECT state, transaction_amt 
+                    FROM committee_contributions 
+                    WHERE transaction_amt > 0; 
+                """)
 
     # Package into output
-    return []
+    return [ {'state': r[0], 'amount': float(r[1])} for r in db ]
 
 
 def get_total_transaction_amounts_by_state():
@@ -44,8 +49,14 @@ def get_total_transaction_amounts_by_state():
 
     :returns: List of dictionaries with 'state' and 'total_amount' keys
     """
-    raise NotImplementedError('Needs implementation')
+    # raise NotImplementedError('Needs implementation')
+    # return []
     # Execute database query
+    db.execute("""SELECT state, SUM(transaction_amt) 
+                    FROM committee_contributions 
+                    WHERE transaction_amt > 0
+                    GROUP BY state; 
+                """)
 
     # Package into list of dictionaries
-    return []
+    return [ {'state': r[0], 'total_amount': float(r[1])} for r in db ]

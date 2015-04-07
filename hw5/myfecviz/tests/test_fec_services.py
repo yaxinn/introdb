@@ -32,3 +32,10 @@ class FECServiceTest(FlaskClientTestCase):
         result = results[0]
         self.assertIn('state', result)
         self.assertIn('total_amount', result)
+
+    # def test_get_total_transaction_amounts_by_state_none(self):
+    #     """Verify transaction amount groupings have the right keys."""
+    #     results = fec.get_total_transaction_amounts_by_state()
+
+    #     result = results[0]
+    #     self.assertIn(None, result.values())

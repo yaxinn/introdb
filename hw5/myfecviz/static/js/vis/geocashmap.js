@@ -98,6 +98,8 @@ USCashMap.prototype.setupMap = function () {
  */
 USCashMap.prototype.render = function (data) {
     // Hack needed to access class object in functions defined in this scope
+    // console.log(data);
+
     var that = this;
 
     var moneyColorScale = d3.scale.sqrt()
@@ -121,7 +123,8 @@ USCashMap.prototype.render = function (data) {
             // Hint: take a look at moneyColorScale defined above
 
             // Implement
-            return '#000';  // Return a hexcode
+            // return '#000';  // Return a hexcode
+            return moneyColorScale(d['total_amount']);
         });
 
     /** Exit phase **/
@@ -148,7 +151,16 @@ USCashMap.prototype.render = function (data) {
         // defined function.
 
         // Implement
-        console.log("Component received a mouseover event!");  // Remove when implemented
+        // console.log("Component received a mouseover event!");  // Remove when implemented
+        that.addStateToSelection(d['state']);
+        that.setInspectionInfo(that.stateNameMap.get(d['state']), d['total_amount']);
+        that.states.transition().duration(200)
+            .attr("fill", function(d) {
+                if (that.hasStateInSelection(d['state'])) {
+                    return '#FBD7D9';
+                } else {
+                    return moneyColorScale(d['total_amount']);
+        }});
     });
 
     /*
@@ -169,7 +181,13 @@ USCashMap.prototype.render = function (data) {
         // defined function.
 
         // Implement
-        console.log("Component received a mouseout event!");  // Remove when implemented
+        // console.log("Component received a mouseout event!");  // Remove when implemented
+        that.clearInspectionInfo();
+        that.removeStateFromSelection(d['state']);
+        that.states.transition().duration(200)
+            .attr("fill", function(d) {
+                return moneyColorScale(d['total_amount']);
+        });
     });
 
     /*
@@ -193,7 +211,16 @@ USCashMap.prototype.render = function (data) {
         // defined function.
 
         // Implement
-        console.log("Component received a click!");  // Remove when implemented
+        // console.log("Component received a click!");  // Remove when implemented
+        that.addStateToSelection(d['state']);
+        that.setInspectionInfo(that.stateNameMap.get(d['state']), d['total_amount']);
+        that.states.transition().duration(200)
+            .attr("fill", function(d) {
+                if (that.hasStateInSelection(d['state'])) {
+                    return '#EB3C46';
+                } else {
+                    return moneyColorScale(d['total_amount']);
+        }});
     });
 };
 
