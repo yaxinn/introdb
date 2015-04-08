@@ -66,24 +66,41 @@ TransactionHistogram.prototype.render = function(data) {
     /** Histogram visualization setup **/
     // Select the bar groupings and bind to the histogram data
     var bar = this.svg.selectAll('.bar')
-          .data(histogramData, function(d) {return d.x;});
+          .data(histogramData, function(d) { return d.x; });
 
     /* Enter phase */
     // Implement
     // Add a new grouping
-
+    bar.enter().append('g').attr('class', 'bar')
+                           .attr("transform", function (d) { return "translate(" + that.xScale(d.x) + "," + 0 + ")";});;
+    
     // Add a rectangle to this bar grouping
+    bar.append('rect');
 
     // Add text to this bar grouping
-
+    bar.append('text');
 
     /** Update phase */
     // Implement
+    var barUpdate = bar.transition().duration(500);
+    barUpdate.select('rect').attr('width', this.width/(this.bins.length + 1) - 1)
+                      .attr('height', function(d) { return that.height - that.yScale(d.y); })
+                      .attr('x', 1)
+                      .attr('y', function(d) { return that.yScale(d.y); })
+                      .attr('fill', this.currentColorState);
 
+    barUpdate.select('text').attr('dy', '1em')
+                      .attr('x', this.width/(this.bins.length + 1)/2 )
+                      .attr('y', function(d) { if (that.yScale(d.y) < 420 ){
+                                                    return that.yScale(d.y);
+                                                } else {
+                                                    return that.yScale(d.y) - 10 ;}})
+                      .attr('text-anchor', 'middle')
+                      .text(function(d) { return that.formatBinCount(d.y); });
 
     /** Exit phase */
     // Implement
-
+    bar.exit().remove();
 
     // Draw / update the axis as well
     this.drawAxis();
@@ -153,7 +170,9 @@ TransactionHistogram.prototype.setScale = function (data) {
       .range(d3.range(0, this.width, this.width/(this.bins.length + 1)));
 
     // Implement: define a suitable yScale given the data
-    this.yScale;
+    this.yScale = d3.scale.linear()
+      .domain ([ 0, d3.max(histogramData, function (d) { return d.y; }) ])
+      .range([this.height, 0]);
 
     return histogramData;
 };
@@ -170,9 +189,9 @@ TransactionHistogram.prototype.hasScaleSet = function () {
 };
 
 TransactionHistogram.prototype.colorStates = {
-    'PRIMARY': 1,
-    'SECONDARY': 2,
-    'DEFAULT': 0
+    'PRIMARY': '#21bd5b',
+    'SECONDARY': '#f2c061',
+    'DEFAULT': '#f0b23d'
 }
 
 

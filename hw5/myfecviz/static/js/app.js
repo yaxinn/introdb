@@ -75,18 +75,23 @@ DashboardController.prototype.firstProcess = function (error, response0, respons
  */
 DashboardController.prototype.processChanges = function () {
     // Implement
-    console.log("Controller notified of map change.");  // Remove when implemented
-
+    // console.log("Controller notified of map change.");  // Remove when implemented
+    var that = this;
     var renderData;  // filter renderData as needed.
+
     if (this.usCashMap.isSelectionClick() && this.usCashMap.hasSelection()) {
         // Selection was clicked
         // Make sure transaction histogram is rescaled to just the selection
-
+        renderData = that.filterTransactionsByMapSelection();
+        that.transactionHistogram.setScale(renderData);
+        that.transactionHistogram.setHistogramColor(that.transactionHistogram.colorStates.SECONDARY);
         // Implement ! 
     } else if (this.usCashMap.hasSelection()) {
         // Selection is just hovered upon
         // Use scale representing all of data (for a visually relative measure) 
-
+        renderData = that.filterTransactionsByMapSelection();
+        that.transactionHistogram.setScale(that.allTransactions);
+        that.transactionHistogram.setHistogramColor(that.transactionHistogram.colorStates.PRIMARY);
         // Implement ! 
     } else {
         // No user interaction
@@ -97,14 +102,14 @@ DashboardController.prototype.processChanges = function () {
     }
 
     // Uncomment the following line when you're ready!
-    // this.transactionHistogram.render(renderData);
+    this.transactionHistogram.render(renderData);
 };
 
 /*
  * filterTransactionsByMapSelection()
  *
  * Filter the objects in the array `this.allTranscations` for objects that match the selected states
- * in `this.usCashMap`.
+ * in `this.usCashMap`.hasS
  *
  * @return {Array} list of objects filtered by the selected states in `this.USCashMap`'s state selection
  */
@@ -121,5 +126,5 @@ DashboardController.prototype.filterTransactionsByMapSelection = function () {
         }
     };
     
-    return this.allTransactions.filter(filterByMapSelections);
+    return that.allTransactions.filter(filterByMapSelections);
 };

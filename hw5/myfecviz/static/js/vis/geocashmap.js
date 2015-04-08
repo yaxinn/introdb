@@ -157,7 +157,7 @@ USCashMap.prototype.render = function (data) {
         that.states.transition().duration(200)
             .attr("fill", function(d) {
                 if (that.hasStateInSelection(d['state'])) {
-                    return '#FBD7D9';
+                    return '#21bd5b';
                 } else {
                     return moneyColorScale(d['total_amount']);
         }});
@@ -217,7 +217,7 @@ USCashMap.prototype.render = function (data) {
         that.states.transition().duration(200)
             .attr("fill", function(d) {
                 if (that.hasStateInSelection(d['state'])) {
-                    return '#EB3C46';
+                    return '#f2c061';
                 } else {
                     return moneyColorScale(d['total_amount']);
         }});
